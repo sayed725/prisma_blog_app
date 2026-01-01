@@ -26,7 +26,7 @@ app.use("/posts", postRouter);
 
 
 app.get("/", (req, res)=> {
-   res.send("Hello from My First Prisma Blog App!")
+   res.send("Hello from My Prisma Blog App!")
 })
 
 export default app;
