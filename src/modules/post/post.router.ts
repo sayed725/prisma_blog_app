@@ -1,16 +1,16 @@
 import express, { Router } from "express";
-import { PostController } from "./post.controller";
+import { postController } from "./post.controller";
 
 import auth, { UserRole } from "../../middlewares/auth";
 
 const router = express.Router();
 
-
+router.get("/", postController.getAllPost);
 
 router.post(
   "/",
   auth(UserRole.ADMIN, UserRole.USER),
-  PostController.createPost
+  postController.createPost
 );
 
 export const postRouter: Router = router;
