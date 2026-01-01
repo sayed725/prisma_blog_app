@@ -1,4 +1,3 @@
-
 import { Request, Response } from "express";
 import { postService } from "./post.service";
 
@@ -23,9 +22,28 @@ const createPost = async (req: Request, res: Response) => {
 const getAllPost = async (req: Request, res: Response) => {
   try {
     const { search } = req.query;
-    const searchString = typeof search === 'string' ? search : undefined
+
+
+    const searchString = typeof search === "string" ? search : undefined;
+
+
     const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
-    const result = await postService.getAllPost({ search: searchString, tags });
+
+    // // spelling correction applied 
+    // const isFeatured = req.query.isFeatured? req.query.isFeatured === 'true' : undefined;
+
+     // true or false
+    const isFeatured = req.query.isFeatured
+      ? req.query.isFeatured === "true"
+        ? true
+        : req.query.isFeatured === "false"
+        ? false
+        : undefined
+      : undefined;
+
+    const result = await postService.getAllPost({ search: searchString, tags, isFeatured });
+
+
     res.status(200).json(result);
   } catch (e) {
     res.status(400).json({
@@ -37,5 +55,5 @@ const getAllPost = async (req: Request, res: Response) => {
 
 export const postController = {
   createPost,
-  getAllPost
+  getAllPost,
 };
