@@ -24,16 +24,14 @@ const getAllPost = async (req: Request, res: Response) => {
   try {
     const { search } = req.query;
 
-
     const searchString = typeof search === "string" ? search : undefined;
-
 
     const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
 
-    // // spelling correction applied 
+    // // spelling correction applied
     // const isFeatured = req.query.isFeatured? req.query.isFeatured === 'true' : undefined;
 
-     // true or false
+    // true or false
     const isFeatured = req.query.isFeatured
       ? req.query.isFeatured === "true"
         ? true
@@ -42,10 +40,17 @@ const getAllPost = async (req: Request, res: Response) => {
         : undefined
       : undefined;
 
-      const status = req.query.status as PostStatus | undefined 
+    const status = req.query.status as PostStatus | undefined;
 
-    const result = await postService.getAllPost({ search: searchString, tags, isFeatured, status });
+    const authorId = req.query.authorId as string | undefined;
 
+    const result = await postService.getAllPost({
+      search: searchString,
+      tags,
+      isFeatured,
+      status,
+      authorId
+    });
 
     res.status(200).json(result);
   } catch (e) {
