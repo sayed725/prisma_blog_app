@@ -61,8 +61,16 @@ const getCommentsByAuthor = async (authorId: string) => {
     })
 }
 
+// 1. nijar comment delete korta parbe
+// login thakte hobe
+// tar nijar comment kina ata check korta hobe
+const deleteComment = async (commentId: string, authorId: string) => {
+   
+}
+
 export const commentService = {
   createComment,
   getCommentById,
-  getCommentsByAuthor
+  getCommentsByAuthor,
+  deleteComment
 };
