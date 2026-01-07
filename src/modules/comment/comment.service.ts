@@ -61,9 +61,9 @@ const getCommentsByAuthor = async (authorId: string) => {
   });
 };
 
-// 1. nijar comment delete korta parbe
-// 2. login thakte hobe
-// 3. tar nijar comment kina ata check korta hobe
+// 1. should be logged in
+// 2. User can only delete his own comment
+// 3. check if the existing comment belongs to the user or not
 const deleteComment = async (commentId: string, authorId: string) => {
   const commentData = await prisma.comment.findFirst({
     where: {
