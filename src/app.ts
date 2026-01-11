@@ -5,6 +5,7 @@ import { auth } from "./lib/auth";
 import cors from 'cors';
 import { commentRouter } from "./modules/comment/comment.router";
 import errorHandler from "./middlewares/globalErrorHandler";
+import { notFound } from "./middlewares/notFound";
 
 
 
@@ -32,5 +33,6 @@ app.get("/", (req, res)=> {
     res.send("Hello from My Prisma Blog App!")
 })
 
+app.use(notFound)
 app.use(errorHandler)
 export default app;
